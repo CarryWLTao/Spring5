@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 基于注解的IOC配置需要导入context名称空间 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+ 		<!-- 告知spring创建容器时需要扫描的包 -->
+ 		<context:component-scan base-package="com.wlt"></context:component-scan>
+ 		<!-- 告知spring的properties文件的位置 -->
+ 		<context:property-placeholder location="jdbcConfig.properties"/>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </beans>
