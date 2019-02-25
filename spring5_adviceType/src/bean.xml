@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+       <!-- 配置业务层 -->
+        <bean id="accountService" class="com.wlt.service.impl.AccountServiceImpl"></bean>
+        
+        
+        <!-- spring基于xml的aop配置
+        							
+        
+         -->
+         
+         <bean id="logger" class="com.wlt.util.Logger"></bean>
+         	
+         <aop:config>
+         	<!-- 使用 aop:pointcut标签可以配置通用切入点的表达式,写在切面aop:aspect标签内部,只能当前切面使用
+         			如果要向所有切面使用,请写到aop:aspect标签外面-->
+         	<aop:pointcut expression="execution(* com.wlt..*.*(..))" id="pt1"/>
+         	<aop:aspect id="logAdvice" ref="logger">
+         	<!-- 配置前置通知:它永远都会在切入点方法执行之前执行 
+         		<aop:before method="beforePrintLog" pointcut="execution(* com.wlt..*.*(..))"/>-->
+         		<!-- 配置后置通知: 当切入点方法正常执行之后,后置通知执行 它和异常通知都只能有一个执行 
+         		<aop:after-returning  method="afterReturningPrintLog" pointcut="execution(* com.wlt..*.*(..))"/>-->
+         		<!-- 配置异常通知:当切入点方法执行产生异常后执行.它和后置通知互斥
+         		<aop:after-throwing method="afterThrowingPrintLog" pointcut="execution(* com.wlt..*.*(..))"/> -->
+         		<!-- 配置最终通知: 无论切入点是否正常执行 他都会再其后面执行 
+         		<aop:after method="afterPrintLog" pointcut="execution(* com.wlt..*.*(..))"/>-->
+         		
+         		<!-- 配置环绕通知 :详细注释写到Logger类里面-->
+         		<aop:around method="aroundPrintLog" pointcut-ref="pt1"/>
+         	</aop:aspect>
+         </aop:config> 
+</beans>
+
+
+
+
